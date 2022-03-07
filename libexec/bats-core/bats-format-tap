@@ -15,7 +15,8 @@ bats_tap_stream_begin() { #<test index> <test name>
 
 bats_tap_stream_ok() { # [--duration <milliseconds] <test index> <test name>
     if [[ "$1" == "--duration" ]]; then
-        printf "ok %d %s # in %d ms\n" "$3" "$4" "$2"
+        printf "ok %d %s\n" "$3" "$4"
+        printf "# TAP2JUNIT: Duration: %dms\n" "$2"
     else
         printf "ok %d %s\n" "$1" "$2"
     fi
@@ -23,7 +24,8 @@ bats_tap_stream_ok() { # [--duration <milliseconds] <test index> <test name>
 
 bats_tap_stream_not_ok() { # [--duration <milliseconds>] <test index> <test name>
     if [[ "$1" == "--duration" ]]; then
-        printf "not ok %d %s # in %d ms\n" "$3" "$4" "$2"
+        printf "not ok %d %s\n" "$3" "$4"
+        printf "# TAP2JUNIT: Duration: %dms\n" "$2"
     else
         printf "not ok %d %s\n" "$1" "$2"
     fi
